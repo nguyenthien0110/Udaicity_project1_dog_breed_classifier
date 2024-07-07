@@ -6,7 +6,7 @@ This project utilizes a pre-trained image classifier to identify dog breeds from
 
 ### Prerequisites
 
-- Python 3.12.4
+- Python 3.8.0
 - PyTorch (for image classification)
 - torchvision (for image transformation and model loading)
 

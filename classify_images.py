@@ -21,7 +21,8 @@ if __name__ == "__main__":
 
     for filename, label in pet_labels.items():
         image_path = in_arg.dir + filename
-        predicted_label = classify_image(model, image_path)
+        predicted_label_index = classify_image(model, image_path)
+        predicted_label = dognames[predicted_label_index] if predicted_label_index < len(dognames) else "Unknown"
         
         pet_label_is_dog = is_dog(label[0], dognames)
         predicted_label_is_dog = is_dog(predicted_label, dognames)
