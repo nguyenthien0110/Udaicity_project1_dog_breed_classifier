@@ -62,5 +62,27 @@ def print_results(results_dic, results_stats_dic, model,
     Returns:
            None - simply printing results.
     """    
-    None
+    print(f"\n\n*** Results Summary for CNN Model Architecture {model.upper()} ***")
+    print(f"N Images            : {results_stats_dic['n_images']:3d}")
+    print(f"N Dog Images        : {results_stats_dic['n_dogs_img']:3d}")
+    print(f"N Not-Dog Images    : {results_stats_dic['n_notdogs_img']:3d}")
+
+    print(f"\n\n*** Percentage Results Summary for CNN Model Architecture {model.upper()} ***")
+    for key, value in results_stats_dic.items():
+        if key.startswith('p'):
+            print(f"{key:20}: {value:.3f}")
+
+    if print_incorrect_dogs and (results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs'] != results_stats_dic['n_images']):
+        print("\nINCORRECT Dog/NOT Dog Assignments:")
+        for key, value in results_dic.items():
+            if value[3] == 1 and value[4] == 0:
+                print(f"Real: {value[0]:>26}   Classifier: {value[1]:>30}")
+            elif value[3] == 0 and value[4] == 1:
+                print(f"Real: {value[0]:>26}   Classifier: {value[1]:>30}")
+
+    if print_incorrect_breed and (results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed']):
+        print("\nINCORRECT Dog Breed Assignment:")
+        for key, value in results_dic.items():
+            if value[3] == 1 and value[2] == 0:
+                print(f"Real: {value[0]:>26}   Classifier: {value[1]:>30}")
                 
